@@ -35,12 +35,12 @@ class Task(models.Model):
         max_length=10,
         choices=PriorityChoices,
         default=PriorityChoices.NORMAL,
-    ),
+    )
     task_type = models.ForeignKey(
         TaskType,
         on_delete=models.SET_NULL,
         null=True,
-    ),
+    )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="tasks"
