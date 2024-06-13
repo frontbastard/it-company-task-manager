@@ -7,6 +7,9 @@ from django.db.models import TextChoices
 class Position(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
@@ -15,9 +18,15 @@ class Worker(AbstractUser):
         null=True,
     )
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} {self.position.name}"
+
 
 class TaskType(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
@@ -45,3 +54,6 @@ class Task(models.Model):
         settings.AUTH_USER_MODEL,
         related_name="tasks"
     )
+
+    def __str__(self):
+        return self.name
