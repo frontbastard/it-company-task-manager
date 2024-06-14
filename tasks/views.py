@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import generic
 
 from tasks.models import Worker, Task, Position
 
@@ -21,3 +22,22 @@ def index(request):
     }
 
     return render(request, "tasks/index.html", context=context)
+
+
+class TaskListView(generic.ListView):
+    model = Task
+    paginate_by = 8
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        priority_classes = {
+            "urgent": "danger",
+            "high": "warning",
+            "normal": "primary",
+            "low": "info",
+        }
+
+        for task in context["task_list"]:
+            task.priority_class = priority_classes.get(task.priority, "info")
+
+        return context

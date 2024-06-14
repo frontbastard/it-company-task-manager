@@ -23,12 +23,7 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        result = f"{self.first_name} {self.last_name}"
-
-        if self.position:
-            result += f" ({self.position.name})"
-
-        return result
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         ordering = ["last_name", "first_name"]
