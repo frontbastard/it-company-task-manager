@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<title>Task Manager: Dashboard</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Welcome to the dashboard!</p>
+    <h2>Our achievements</h2>
+    <p>We are growing every day, so join our team:</p>
+    <ul>
+        <li><strong>Tasks:</strong> {{ tasks_num }}</li>
+        <li><strong>Employees:</strong> {{ workers_num }}</li>
+        <li><strong>Positions:</strong> {{ positions_num }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ visits_num }} time{{ visits_num|pluralize }}.
+    </p>
+
+{% endblock %}
