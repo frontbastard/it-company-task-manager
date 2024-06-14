@@ -32,7 +32,15 @@ class WorkerAdmin(UserAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("name", "deadline", "is_completed", "priority", "task_type", "tags_list", "assignees_list")
+    list_display = (
+        "name",
+        "deadline",
+        "is_completed",
+        "priority",
+        "task_type",
+        "tags_list",
+        "assignees_list",
+    )
     search_fields = ("name",)
     list_filter = ("is_completed",)
 
@@ -44,10 +52,19 @@ class TaskAdmin(admin.ModelAdmin):
         if assignees:
             assignee_links = []
             for worker in assignees:
-                assignee_links.append('<a href="{}">{}</a>'.format(
-                    reverse('admin:%s_%s_change' % (worker._meta.app_label, worker._meta.model_name), args=(worker.pk,)),
-                    str(worker)
-                ))
+                assignee_links.append(
+                    '<a href="{}">{}</a>'.format(
+                        reverse(
+                            "admin:%s_%s_change"
+                            % (
+                                worker._meta.app_label,
+                                worker._meta.model_name
+                            ),
+                            args=(worker.pk,),
+                        ),
+                        str(worker),
+                    )
+                )
             return format_html(", ".join(assignee_links))
         else:
             return "-"
