@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from tasks.models import Worker, Task, Position
+
+
+def index(request):
+    pass
