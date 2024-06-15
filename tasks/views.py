@@ -49,3 +49,8 @@ class WorkerListView(generic.ListView):
 
     def get_queryset(self):
         return super().get_queryset().exclude(is_superuser=True)
+
+
+class PositionListView(generic.ListView):
+    model = Position
+    paginate_by = 8
