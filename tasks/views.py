@@ -41,3 +41,11 @@ class TaskListView(generic.ListView):
             task.priority_class = priority_classes.get(task.priority, "info")
 
         return context
+
+
+class WorkerListView(generic.ListView):
+    model = Worker
+    paginate_by = 8
+
+    def get_queryset(self):
+        return super().get_queryset().exclude(is_superuser=True)
