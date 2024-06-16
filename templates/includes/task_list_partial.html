@@ -1,0 +1,47 @@
+<div class="list-group">
+  {% for task in task_list %}
+    <div class="list-group-item d-flex w-100 justify-content-between">
+      <div>
+        <div class="d-flex align-items-start">
+          {% if task.priority %}
+            <span class="badge text-{{ task.priority_class }} badge-pill mt-1 pl-0">
+              {{ task.priority_label }}
+            </span>
+          {% endif %}
+          <h5 class="mb-1">
+            <a href="#" class="list-group-item-action">{{ task.name }}</a>
+          </h5>
+        </div>
+        {% if task.assignees %}
+          <p class="mb-0">
+            {% for assignee in task.assignees.all %}
+              <small class="badge badge-pill badge-secondary">
+                {{ assignee }}
+              </small>
+            {% endfor %}
+          </p>
+        {% endif %}
+      </div>
+      <div class="text-right">
+        <p class="mb-1">
+          <small>
+            {% if task.updated_at > task.created_at %}
+              {{ task.updated_at }}
+            {% else %}
+              {{ task.created_at }}
+            {% endif %}
+          </small>
+        </p>
+        {% if task.tags %}
+          <p class="mb-0">
+            {% for tag in task.tags.all %}
+              <span class="badge badge-primary badge-pill">{{ tag }}</span>
+            {% endfor %}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no tasks.</p>
+  {% endfor %}
+</div>

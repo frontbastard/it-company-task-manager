@@ -87,5 +87,19 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def priority_class(self):
+        priority_classes = {
+            self.PriorityChoices.URGENT: "danger",
+            self.PriorityChoices.HIGH: "warning",
+            self.PriorityChoices.NORMAL: "primary",
+            self.PriorityChoices.LOW: "info",
+        }
+        return priority_classes.get(self.priority, self.PriorityChoices.LOW)
+
+    @property
+    def priority_label(self):
+        return self.get_priority_display()
+
     class Meta:
         ordering = ["deadline"]
