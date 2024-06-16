@@ -54,3 +54,9 @@ class WorkerListView(generic.ListView):
 class PositionListView(generic.ListView):
     model = Position
     paginate_by = 8
+
+
+class WorkerDetailView(generic.DetailView):
+    model = Worker
+    queryset = (Worker.objects.select_related("position")
+                .prefetch_related("tasks"))

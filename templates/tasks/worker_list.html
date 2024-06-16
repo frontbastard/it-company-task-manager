@@ -13,9 +13,11 @@
     <div class="list-group">
       {% for worker in worker_list %}
         <div class="list-group-item d-flex w-100 justify-content-between">
-          {{ worker.first_name }} {{ worker.last_name }}
+          <a href="{% url "tasks:worker-detail" worker.pk %}">
+            {{ worker.first_name }} {{ worker.last_name }}
+          </a>
           {% if worker.position %}
-            - {{ worker.position }}
+            {{ worker.position }}
           {% endif %}
         </div>
       {% endfor %}

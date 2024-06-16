@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<title>Worker Detail</title>
+{% endblock %}
+
+{% block content %}
+  <h1>
+    {{ worker.username }}
+  </h1>
+
+  <p><strong>First name:</strong> {{ worker.first_name|default:"-" }}</p>
+  <p><strong>Last name:</strong> {{ worker.last_name|default:"-" }}</p>
+  <p><strong>Position:</strong> {{ worker.position|default:"-" }}</p>
+
+  <div class="ml-3">
+    <h4>Tasks</h4>
+
+    {% include "includes/task_list_partial.html" with task_list=worker.tasks.all %}
+  </div>
+{% endblock %}
