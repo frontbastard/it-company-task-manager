@@ -10,6 +10,7 @@
   </h1>
 
   {% if position_list %}
+    {% include "includes/search_form.html" %}
     <div class="list-group">
       {% for position in position_list %}
         <div class="list-group-item d-flex w-100 justify-content-between">
