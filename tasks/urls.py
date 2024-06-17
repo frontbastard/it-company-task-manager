@@ -1,17 +1,14 @@
 from django.urls import path
 
-from tasks import views
-from tasks.views import (
-    TaskListView,
-    WorkerListView,
-    PositionListView,
-    WorkerDetailView,
-)
+from tasks.views.base import index
+from tasks.views.position_views import PositionListView
+from tasks.views.task_views import TaskListView
+from tasks.views.worker_views import WorkerListView, WorkerDetailView
 
 app_name = "tasks"
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", index, name="index"),
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
     path("positions/", PositionListView.as_view(), name="position-list"),
