@@ -1,6 +1,6 @@
-<div class="list-group">
+<div class="task-list list-group">
   {% for task in task_list %}
-    <div class="list-group-item d-flex w-100 justify-content-between{{ task.is_completed|yesno:' task__completed,' }}">
+    <div class="list-group-item d-flex justify-content-between task-list-item{{ task.is_completed|yesno:' completed,' }}">
       <div>
         <div class="d-flex align-items-start">
           {% if task.priority %}
