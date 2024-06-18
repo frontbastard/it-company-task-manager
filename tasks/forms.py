@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from tasks.models import Task, Tag
+from tasks.models import Task, Tag, TaskType
 
 
 class SearchForm(forms.Form):
@@ -16,24 +16,30 @@ class SearchForm(forms.Form):
                 attrs={
                     "placeholder": f"Search by {search_field}"
                 }
-            )
+            ),
         )
 
 
 class TaskForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
     )
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
     )
     deadline = forms.DateTimeField(
         widget=forms.DateTimeInput(
             attrs={"type": "datetime-local"}
         ),
-        required=False
+        required=False,
+    )
+    task_type = forms.ModelChoiceField(
+        queryset=TaskType.objects.all(),
+        required=False,
     )
 
     def __init__(self, *args, **kwargs):
