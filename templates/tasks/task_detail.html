@@ -12,6 +12,9 @@
       <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-secondary mr-3">
         Update
       </a>
+      <a href="{% url 'tasks:task-delete' pk=task.pk %}" class="btn btn-danger mr-3">
+        Delete
+      </a>
     </div>
   </div>
 
