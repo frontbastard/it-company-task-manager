@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.auth import get_user_model
+
+from tasks.models import Task, Tag
 
 
 class SearchForm(forms.Form):
@@ -15,3 +18,34 @@ class SearchForm(forms.Form):
                 }
             )
         )
+
+
+class TaskForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+    deadline = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={"type": "datetime-local"}
+        ),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if self.instance is None:
+            self.fields.pop("is_completed", None)
+        else:
+            pass
+
+    class Meta:
+        model = Task
+        fields = ['name', 'description', 'deadline',
+                  'priority', 'task_type', 'assignees', 'tags']
