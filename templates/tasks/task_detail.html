@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task Details</title>
+{% endblock %}
+
+{% block content %}
+  <h1>
+    {{ task.name }}</h1>
+  <small class="d-block mb-2">
+    Priority:
+    {% if task.priority %}
+      <span class="text-{{ task.priority_class }}">
+        {{ task.priority_label }}
+      </span>
+    {% endif %}
+  </small>
+  <p>{{ task.description }}</p>
+  <ul class="d-flex list-inline mt-4">
+    <li>
+      <h2 class="h5">Start Date</h2>
+      <p>{{ task.created_at|date:"d F Y" }} <small class="text-muted">{{ task.created_at|time:"h:i A" }}</small></p>
+    </li>
+    <li class="ml-5">
+      <h2 class="h5">Deadline</h2>
+      <p>{{ task.deadline|date:"d F Y" }} <small class="text-muted">{{ task.deadline|time:"h:i A" }}</small></p>
+    </li>
+  </ul>
+  <div class="task-tags mt-4">
+    <h2 class="h5">Tags</h2>
+    {% if task.tags %}
+      <p class="mb-0">
+        {% for tag in task.tags.all %}
+          <span class="badge badge-primary badge-pill">{{ tag }}</span>
+        {% endfor %}
+      </p>
+    {% endif %}
+  </div>
+  <div class="assign-team mt-4">
+    <h2 class="h5">Assign to</h2>
+    <div class="d-flex items-center">
+      {% for assignee in task.assignees.all %}
+        <a href="{% url "tasks:worker-detail" assignee.pk %}" class="mr-2">
+          <img
+              class="rounded-circle thumb-sm"
+              alt="{{ assignee.username }}"
+              src="https://avatar.iran.liara.run/username?username={{ assignee.first_name }}+{{ assignee.last_name }}"
+              width="32"
+              height="32"
+          >
+        </a>
+      {% endfor %}
+      <a href="#">
+      <span class="d-block rounded-circle p-1">
+        <i class="fa fa-plus h4"></i>
+      </span>
+      </a>
+    </div>
+  </div>
+{% endblock %}

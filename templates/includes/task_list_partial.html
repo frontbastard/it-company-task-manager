@@ -9,7 +9,7 @@
             </span>
           {% endif %}
           <h5 class="mb-1">
-            <a href="#" class="list-group-item-action">{{ task.name }}</a>
+            <a href="{% url "tasks:task-detail" task.pk %}" class="list-group-item-action">{{ task.name }}</a>
           </h5>
         </div>
         {% if task.assignees %}

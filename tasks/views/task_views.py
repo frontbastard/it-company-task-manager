@@ -13,3 +13,9 @@ class TaskListView(
     model = Task
     paginate_by = 8
     search_field = "name"
+
+
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Task
+    queryset = (Task.objects.select_related("task_type")
+                .prefetch_related("assignees", "tags"))
