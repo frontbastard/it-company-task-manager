@@ -2,6 +2,11 @@
 
 <form method="get" class="input-group align-items-start">
   {{ search_form|crispy }}
+  {% for key, value in query_params.items %}
+    {% if key != "name" %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endif %}
+  {% endfor %}
   <div class="input-group-append">
     <button type="submit" class="btn btn-outline-secondary">Submit</button>
   </div>

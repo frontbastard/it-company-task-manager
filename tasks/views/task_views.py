@@ -6,17 +6,32 @@ from django.views import generic, View
 
 from tasks.forms import TaskForm
 from tasks.models import Task
-from tasks.views.mixins import SearchableMixin
+from tasks.views.mixins import SearchableMixin, SortableMixin
 
 
 class TaskListView(
     LoginRequiredMixin,
     SearchableMixin,
+    SortableMixin,
     generic.ListView
 ):
     model = Task
     paginate_by = 8
     search_field = "name"
+    default_ordering = "name"
+    sort_fields = [
+        {"value": "name", "label": "Name asc"},
+        {"value": "-name", "label": "Name desc"},
+        {"value": "is_completed", "label": "Completed asc"},
+        {"value": "-is_completed", "label": "Completed desc"},
+    ]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.get_ordering()
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        return queryset
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
