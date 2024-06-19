@@ -53,5 +53,5 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'deadline',
-                  'priority', 'task_type', 'assignees', 'tags']
+        fields = ["name", "description", "deadline",
+                  "priority", "task_type", "assignees", "tags"]
