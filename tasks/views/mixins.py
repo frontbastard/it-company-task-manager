@@ -14,6 +14,7 @@ class SearchableMixin(generic.ListView):
             search_field=self.search_field,
             initial={self.search_field: search_value}
         )
+        context["search_field"] = self.search_field
         context["query_params"] = self.request.GET.copy()
         return context
 

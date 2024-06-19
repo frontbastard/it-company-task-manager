@@ -3,7 +3,7 @@
 <form method="get" class="input-group align-items-start">
   {{ search_form|crispy }}
   {% for key, value in query_params.items %}
-    {% if key != "name" %}
+    {% if key != search_field %}
       <input type="hidden" name="{{ key }}" value="{{ value }}">
     {% endif %}
   {% endfor %}
