@@ -4,6 +4,12 @@
   <title>Workers List</title>
 {% endblock %}
 
+{% block back_button %}
+  <a href="{% url 'tasks:index' %}">
+    <i class="fa fa-arrow-left"></i> Home
+  </a>
+{% endblock %}
+
 {% block content %}
   <h1>
     Workers List

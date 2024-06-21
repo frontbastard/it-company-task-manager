@@ -4,26 +4,30 @@
   <title>Task Details</title>
 {% endblock %}
 
-{% block content %}
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <a href="{% url 'tasks:task-list' %}">
-      <i class="fa fa-arrow-left"></i> Tasks List
+{% block back_button %}
+  <a href="{% url 'tasks:task-list' %}">
+    <i class="fa fa-arrow-left"></i> Tasks List
+  </a>
+{% endblock %}
+
+{% block actions %}
+  <div class="d-flex">
+    <form action="{% url 'tasks:task-toggle-completion' pk=task.pk %}" method="post" class="mr-3">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">
+        {{ task.is_completed|yesno:"Mark as Incomplete,Mark as Complete" }}
+      </button>
+    </form>
+    <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-secondary mr-3">
+      Update
     </a>
-    <div class="d-flex">
-      <form action="{% url 'tasks:task-toggle-completion' pk=task.pk %}" method="post" class="mr-3">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">
-          {{ task.is_completed|yesno:"Mark as Incomplete,Mark as Complete" }}
-        </button>
-      </form>
-      <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-secondary mr-3">
-        Update
-      </a>
-      <a href="{% url 'tasks:task-delete' pk=task.pk %}" class="btn btn-danger">
-        Delete
-      </a>
-    </div>
+    <a href="{% url 'tasks:task-delete' pk=task.pk %}" class="btn btn-danger">
+      Delete
+    </a>
   </div>
+{% endblock %}
+
+{% block content %}
   {% if messages %}
     <div class="alert alert-info" role="alert">
       {% for message in messages %}

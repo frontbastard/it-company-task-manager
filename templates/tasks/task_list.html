@@ -4,12 +4,21 @@
   <title>Tasks List</title>
 {% endblock %}
 
+{% block back_button %}
+  <a href="{% url 'tasks:index' %}">
+    <i class="fa fa-arrow-left"></i> Home
+  </a>
+{% endblock %}
+
+{% block actions %}
+  <a href="{% url 'tasks:task-create' %}" class="btn btn-primary">
+    Create
+  </a>
+{% endblock %}
+
 {% block content %}
   <div class="d-flex justify-content-between align-items-start">
     <h1>Tasks List</h1>
-    <a href="{% url 'tasks:task-create' %}" class="btn btn-primary">
-      Create
-    </a>
   </div>
   <div class="d-flex justify-space-between align-items-start">
     {% include "includes/search_form.html" %}
