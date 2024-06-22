@@ -1,6 +1,12 @@
 from django.test import TestCase
 
-from tasks.tests.factories import WorkerFactory, TaskFactory, PositionFactory, TaskTypeFactory, TagFactory
+from tasks.tests.factories import (
+    WorkerFactory,
+    TaskFactory,
+    PositionFactory,
+    TaskTypeFactory,
+    TagFactory,
+)
 
 
 class ModelTests(TestCase):

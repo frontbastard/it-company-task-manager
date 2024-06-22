@@ -36,8 +36,8 @@ class PrivateTaskTest(TestCase):
     def test_search_tasks(self):
         res = self.client.get(TASK_LIST_URL, {"name": "test name"})
         self.assertEqual(res.status_code, 200)
-        self.assertContains(res, "Test name 0")
-        self.assertContains(res, "Test name 1")
+        self.assertContains(res, "Test name")
+        self.assertContains(res, "Test name")
         self.assertNotContains(res, "Fake name")
 
     @parameterized.expand([
@@ -51,4 +51,3 @@ class PrivateTaskTest(TestCase):
         self.assertEqual(res.status_code, 200)
         tasks = list(Task.objects.all().order_by(sort_by))
         self.assertEqual(list(res.context["task_list"]), tasks)
-

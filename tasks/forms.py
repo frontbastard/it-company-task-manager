@@ -14,7 +14,8 @@ class SearchForm(forms.Form):
             label="",
             widget=forms.TextInput(
                 attrs={
-                    "placeholder": f"Search by {search_field}"
+                    "placeholder": f"Search by {search_field}",
+                    "class": "form-control",
                 }
             ),
         )
@@ -50,6 +51,10 @@ class TaskForm(forms.ModelForm):
             self.fields.pop("is_completed", None)
         else:
             pass
+
+        for field_name, field in self.fields.items():
+            if not isinstance(field.widget, forms.CheckboxSelectMultiple):
+                field.widget.attrs["class"] = "form-control"
 
     class Meta:
         model = Task

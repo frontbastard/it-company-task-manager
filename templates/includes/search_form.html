@@ -1,13 +1,13 @@
-{% load crispy_forms_filters %}
-
-<form method="get" class="input-group align-items-start">
-  {{ search_form|crispy }}
+<form method="get" class="input-group align-items-start w-25">
+  <div class="input-group input-group-outline mb-4">
+    {{ search_form.as_table }}
+  </div>
+  <button type="submit" class="input-group-text mx-2">
+    <i class="fas fa-search" aria-hidden="true"></i>
+  </button>
   {% for key, value in query_params.items %}
     {% if key != search_field %}
       <input type="hidden" name="{{ key }}" value="{{ value }}">
     {% endif %}
   {% endfor %}
-  <div class="input-group-append">
-    <button type="submit" class="btn btn-outline-secondary">Submit</button>
-  </div>
 </form>
