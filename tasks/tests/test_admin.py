@@ -1,15 +1,22 @@
+import os
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
+from dotenv import load_dotenv
+
 from tasks.tests.factories import WorkerFactory, PositionFactory
+
+load_dotenv()
 
 
 class AdminSiteTests(TestCase):
+    secret = os.getenv("SECRET_KEY")
     def setUp(self) -> None:
         self.admin_user = get_user_model().objects.create_superuser(
             username="admin",
-            password="<PASSWORD>"
+            password=os.getenv("SECRET_KEY")
         )
         self.client.force_login(self.admin_user)
         self.worker = WorkerFactory(position=PositionFactory())
