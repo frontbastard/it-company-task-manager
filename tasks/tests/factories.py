@@ -18,7 +18,10 @@ class PositionFactory(factory.django.DjangoModelFactory):
 
 class WorkerFactory(factory.django.DjangoModelFactory):
     username = factory.Sequence(lambda n: f"Test username {n}")
-    password = factory.PostGenerationMethodCall("set_password", os.getenv("SECRET_KEY"))
+    password = factory.PostGenerationMethodCall(
+        "set_password",
+        os.getenv("TEST_USER_PASSWORD")
+    )
     position = factory.SubFactory(PositionFactory)
 
     class Meta:

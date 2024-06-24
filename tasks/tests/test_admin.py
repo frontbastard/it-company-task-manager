@@ -15,7 +15,7 @@ class AdminSiteTests(TestCase):
     def setUp(self) -> None:
         self.admin_user = get_user_model().objects.create_superuser(
             username="admin",
-            password=os.getenv("SECRET_KEY")
+            password=os.getenv("TEST_USER_PASSWORD")
         )
         self.client.force_login(self.admin_user)
         self.worker = WorkerFactory(position=PositionFactory())
