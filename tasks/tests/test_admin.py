@@ -12,7 +12,6 @@ load_dotenv()
 
 
 class AdminSiteTests(TestCase):
-    secret = os.getenv("SECRET_KEY")
     def setUp(self) -> None:
         self.admin_user = get_user_model().objects.create_superuser(
             username="admin",
