@@ -9,26 +9,33 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-h0_)n=0s%2!g2nz@7m@xv3hp)-f6!4kia2g&ke+8wj$=pfbr!="
-)
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise ValueError(
+        "No SECRET_KEY set for Django application. "
+        "Please set the DJANGO_SECRET_KEY environment variable."
+    )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "localhost",
+]
 
 # Application definition
 
@@ -78,7 +85,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = "task_manager.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -89,29 +95,27 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation."
-        "UserAttributeSimilarityValidator",
+                "UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation."
-        "MinimumLengthValidator",
+                "MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation."
-        "CommonPasswordValidator",
+                "CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation."
-        "NumericPasswordValidator",
+                "NumericPasswordValidator",
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -123,7 +127,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
