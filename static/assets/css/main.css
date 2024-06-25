@@ -1,0 +1,19 @@
+.task-list .task-list-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: #eeeeee;
+}
+
+.task-list .task-list-item.completed::before {
+    background: greenyellow;
+}
+
+.form-control,
+.form-control:focus {
+    border: 1px solid #d2d6da;
+    padding: 0.5rem 15px;
+}

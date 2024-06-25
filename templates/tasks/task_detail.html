@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Task Detail
+{% endblock %}
+
+{% block content %}
+  {% include "includes/navigation-light.html" %}
+  <div class="container mt-5">
+    <div class="row mb-3">
+      <div class="col-lg-12 mx-auto">
+        {% if messages %}
+          <div class="alert alert-info text-light" role="alert">
+            {% for message in messages %}
+              <p class="my-0">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-between align-items-start">
+          <a href="{% url 'tasks:task-list' %}">
+            <i class="fa fa-arrow-left"></i> Tasks List
+          </a>
+          <div class="d-flex">
+            <form action="{% url 'tasks:task-toggle-completion' pk=task.pk %}" method="post" class="me-3">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">
+                {{ task.is_completed|yesno:"Mark as Incomplete,Mark as Complete" }}
+              </button>
+            </form>
+            <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-secondary me-3">
+              Update
+            </a>
+            <a href="{% url 'tasks:task-delete' pk=task.pk %}" class="btn btn-danger">
+              Delete
+            </a>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h1>{{ task.name }}</h1>
+        </div>
+
+        <small class="d-inline-block mb-2 me-2">
+          Priority:
+          {% if task.priority %}
+            <span class="text-{{ task.priority_class }}">
+              <strong>{{ task.priority_label }}</strong>
+            </span>
+          {% endif %}
+        </small>
+        <small class="d-inline-block mb-2 me-2">
+          Is completed:
+          <span class="text-{{ task.is_completed|yesno:'success,danger' }}">
+            <strong>{{ task.is_completed|yesno:"Yes,No" }}</strong>
+          </span>
+        </small>
+        <small class="d-inline-block mb-2">
+          Created at:
+          <strong>
+            {{ task.created_at|date:"d F Y" }}
+            <small class="text-muted">{{ task.created_at|time:"h:i A" }}</small>
+          </strong>
+        </small>
+
+        <p class="mb-4">{{ task.description }}</p>
+
+        <h2 class="h4">Deadline</h2>
+        {% if task.deadline %}
+          <p>{{ task.deadline|date:"d F Y" }} <small class="text-muted">{{ task.deadline|time:"h:i A" }}</small></p>
+        {% else %}
+          <p>No deadline</p>
+        {% endif %}
+
+        <h2 class="h4">Tags</h2>
+        {% if task.tags %}
+          <p class="mb-4">
+            {% for tag in task.tags.all %}
+              <span class="badge bg-gradient-info badge-pill">{{ tag }}</span>
+            {% empty %}
+              No tags
+            {% endfor %}
+          </p>
+        {% endif %}
+
+        <h2 class="h4">Assigned to</h2>
+        <div class="d-flex align-items-center pt-1">
+          {% for assignee in task.assignees.all %}
+            <a href="{% url "tasks:worker-detail" assignee.pk %}" class="me-2">
+              <img
+                  class="rounded-circle thumb-sm"
+                  alt="{{ assignee.username }}"
+                  src="https://avatar.iran.liara.run/username?username={{ assignee }}"
+                  width="32"
+                  height="32"
+              >
+            </a>
+          {% empty %}
+            No assignees
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

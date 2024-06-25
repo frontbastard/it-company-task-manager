@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+  {{ object|yesno:"Update,Create" }} Task
+{% endblock %}
+
+{% block content %}
+  {% include "includes/navigation-light.html" %}
+  <div class="container mt-5">
+    <div class="row mb-3">
+      <div class="col-lg-12 mx-auto">
+        <a href="{% url 'tasks:worker-list' %}">
+          <i class="fa fa-arrow-left"></i> Workers List
+        </a>
+        <h1>{{ object|yesno:"Update,Create" }} Task</h1>
+        <form action="" method="post" novalidate>
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

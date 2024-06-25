@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Worker List
+{% endblock %}
+
+{% block content %}
+  {% include "includes/navigation-light.html" %}
+  <div class="container mt-5">
+    <div class="row mb-3">
+      <div class="col-lg-12 mx-auto">
+        <a href="{% url 'tasks:index' %}">
+          <i class="fa fa-arrow-left"></i> Home
+        </a>
+
+        <h1>
+          Workers List
+        </h1>
+
+        {% if worker_list %}
+          {% include "includes/search_form.html" %}
+          <div class="list-group">
+            {% for worker in worker_list %}
+              <div class="list-group-item d-flex w-100 justify-content-between">
+                <a href="{% url "tasks:worker-detail" worker.pk %}">
+                  {{ worker.first_name }} {{ worker.last_name }}
+                </a>
+                {% if worker.position %}
+                  {{ worker.position }}
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p>There are no workers in the service.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

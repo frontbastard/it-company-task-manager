@@ -1,0 +1,15 @@
+<form method="get" action="{% url 'tasks:task-list' %}" class="w-25 mb-4">
+  <div class="input-group input-group-outline">
+    <select id="sort_by" name="sort_by" onchange="this.form.submit()" class="form-select px-3">
+      {% for field in sort_fields %}
+        <option value="{{ field.value }}" {% if current_sort == field.value %}selected{% endif %}>{{ field.label }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+  {% for key, value in query_params.items %}
+    {% if key != "sort_by" %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endif %}
+  {% endfor %}
+</form>

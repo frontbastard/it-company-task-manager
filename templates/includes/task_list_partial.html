@@ -1,0 +1,53 @@
+<div class="task-list list-group">
+  {% for task in task_list %}
+    <div
+        class="list-group-item d-flex justify-content-between task-list-item{{ task.is_completed|yesno:' completed,' }}"
+    >
+      <div>
+        <div class="d-flex align-items-start">
+          {% if task.priority %}
+            <span class="badge text-{{ task.priority_class }} badge-pill mt-1 ps-0">
+              {{ task.priority_label }}
+            </span>
+          {% endif %}
+          <h5 class="mb-1">
+            <a href="{% url "tasks:task-detail" task.pk %}" class="list-group-item-action">{{ task.name }}</a>
+          </h5>
+        </div>
+        {% if task.assignees %}
+          <div class="avatar-group">
+            {% for assignee in task.assignees.all %}
+              <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip"
+                 data-bs-placement="bottom" title="{{ assignee }}">
+                <img
+                    alt="Image placeholder"
+                    src="https://avatar.iran.liara.run/username?username={{ assignee }}"
+                >
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="text-end">
+        <p class="mb-1">
+          <small>
+            {% if task.updated_at > task.created_at %}
+              {{ task.updated_at }}
+            {% else %}
+              {{ task.created_at }}
+            {% endif %}
+          </small>
+        </p>
+        {% if task.tags %}
+          <p class="mb-0">
+            {% for tag in task.tags.all %}
+              <span class="badge bg-gradient-info">{{ tag }}</span>
+            {% endfor %}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p>There are no tasks.</p>
+  {% endfor %}
+</div>
