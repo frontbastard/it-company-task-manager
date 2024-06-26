@@ -167,11 +167,11 @@ STATICFILES_DIRS = [
 
 if not DEBUG:
     STATIC_ROOT = BASE_DIR / "staticfiles"
-    # STORAGES = {
-    #     "staticfiles": {
-    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    #     },
-    # }
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 
 ASSETS_ROOT = "/static/assets"
 
