@@ -10,6 +10,7 @@
  =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
@@ -35,7 +36,6 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/material-kit.css?v=3.0.0" rel="stylesheet"/>
   <!-- Additional CSS in static file -->
-  {% load static %}
   <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 
   <!-- Specific Page CSS goes HERE  -->
@@ -43,13 +43,13 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %} bg-gray-200">
-  {% block content %}{% endblock content %}
+{% block content %}{% endblock content %}
 
-  {% include "includes/footer.html" %}
-  {% include "includes/scripts.html" %}
+{% include "includes/footer.html" %}
+{% include "includes/scripts.html" %}
 
-  <!-- Specific Page JS goes HERE  -->
-  {% block javascript %}{% endblock javascript %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascript %}{% endblock javascript %}
 
 </body>
 </html>
