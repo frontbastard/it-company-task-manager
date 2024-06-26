@@ -6,6 +6,16 @@ Task Manager is a robust tool designed for managing tasks efficiently and effect
 
 ---
 
+## Demo
+
+https://it-company-task-manager-hvco.onrender.com/
+
+Login: admin
+
+Password: 1qazcde3
+
+---
+
 ## Installing / Getting started
 
 To get the Task Manager up and running, follow these steps:
