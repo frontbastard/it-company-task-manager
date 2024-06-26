@@ -36,7 +36,7 @@ for _ in range(random.randint(15, 20)):
     user = User.objects.create_user(
         username=fake.user_name(),
         email=fake.email(),
-        password=os.getenv("SECRET_KEY"),
+        password=os.getenv("TEST_USER_PASSWORD"),
         first_name=fake.first_name(),
         last_name=fake.last_name(),
         position=random.choice(positions) if random.random() > 0.5 else None,
@@ -87,7 +87,7 @@ with open(filename, "w") as f:
 User.objects.create_superuser(
     username="admin",
     email="admin@example.com",
-    password=os.getenv("SECRET_KEY"),
+    password=os.getenv("TEST_USER_PASSWORD"),
     first_name="Admin",
     last_name="User"
 )
