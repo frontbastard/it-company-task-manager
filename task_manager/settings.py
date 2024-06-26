@@ -169,7 +169,7 @@ if not DEBUG:
     STATIC_ROOT = BASE_DIR / "staticfiles"
     STORAGES = {
         "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
         },
     }
 
