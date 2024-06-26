@@ -8,5 +8,8 @@ pip install -r requirements.txt
 # Convert static asset files
 python manage.py collectstatic --no-input
 
+# Create fake data in DB
+python fixtures/create_demo_data.py
+
 # Apply any outstanding database migrations
 python manage.py migrate
