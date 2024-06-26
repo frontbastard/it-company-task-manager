@@ -1,3 +1,7 @@
+### Custom ###
+staticfiles/*
+!staticfiles/.gitkeep
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,macos,pycharm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,macos,pycharm+all
 
