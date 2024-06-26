@@ -136,7 +136,7 @@ We welcome contributions to the Task Manager project. To contribute, please fork
 
 ## Links
 
-- **Project Homepage:** [Task Manager](https://github.com/frontbastard/it-company-task-manager.git/)
+- **Project Homepage:** [Task Manager](https://it-company-task-manager-hvco.onrender.com/)
 - **Repository:** [GitHub Repository](https://github.com/frontbastard/it-company-task-manager.git/)
 - **Issue Tracker:** [GitHub Issues](https://github.com/frontbastard/it-company-task-manager.git/issues)
 

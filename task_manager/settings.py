@@ -37,6 +37,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "it-company-task-manager-hvco.onrender.com",
 ]
 
 # Application definition
