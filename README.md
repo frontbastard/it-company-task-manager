@@ -9,10 +9,12 @@ Task Manager is a robust tool designed for managing tasks efficiently and effect
 ## Demo
 
 https://it-company-task-manager-hvco.onrender.com/
+- Login: admin
+- Password: 1qazcde3
 
-Login: admin
-
-Password: 1qazcde3
+> ### If the page does not load
+> 
+> Most likely, you will need to wait about 50 seconds for the service that hosts the project to bring up the environment. Since this is a free plan on render.com, after 5 minutes of inactivity, the project becomes inactive and takes about a minute to turn back on.
 
 ---
 
